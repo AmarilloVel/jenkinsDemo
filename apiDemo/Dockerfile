@@ -1,10 +1,15 @@
-# Etapa 1: Construcción (Maven con Java 17)
-FROM maven:3.8.6-eclipse-temurin-17 AS build
-COPY . .
-RUN mvn clean package -DskipTests
-
-# Etapa 2: Ejecución (Java 17 ligero)
+# Usamos una imagen de Java muy ligera para la ejecución
 FROM eclipse-temurin:17-jre-alpine
-COPY --from=build /target/*.jar app.jar
+
+# Creamos un directorio para la app
+WORKDIR /app
+
+# COPIAMOS el archivo .jar generado por Jenkins en la etapa de Build
+# Jenkins lo guarda en apiDemo/target/*.jar
+COPY target/*.jar app.jar
+
+# Exponemos el puerto de la aplicación
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "/app.jar"]
+
+# Comando para arrancar la aplicación
+ENTRYPOINT ["java", "-jar", "app.jar"]
