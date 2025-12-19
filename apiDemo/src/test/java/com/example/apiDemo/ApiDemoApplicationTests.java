@@ -26,6 +26,6 @@ class ApiDemoApplicationTests {
         DemoController controller = new DemoController();
         // PARA LA DEMO: Cambia el 90 por un 50 para que el test falle
         // assertEquals(50, controller.calcularDescuento(100));
-        assertEquals(90, controller.calculateDiscount(100));
+        assertEquals(50, controller.calculateDiscount(100));
     }
 }
