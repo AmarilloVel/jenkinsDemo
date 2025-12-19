@@ -10,7 +10,7 @@ public class DemoController {
 
     @GetMapping("/hello")
     public String sayHello() {
-        return "Respuesta de la API: OK";
+        return "Respuesta de la API: Hola team";
     }
     public int calculateDiscount(int price) {
         if (price < 0) throw new IllegalArgumentException("El precio no puede ser negativo");

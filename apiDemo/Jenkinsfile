@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage('Build & Test 🏗️') {
+        stage('Build & Test ') {
             steps {
                 script {
                     // Entramos a la carpeta donde está el pom.xml
@@ -13,7 +13,7 @@ pipeline {
                 }
             }
         }
-        stage('Docker Deploy 🚀') {
+        stage('Docker Deploy') {
             steps {
                 script {
                     // Entramos a la carpeta donde está el Dockerfile
