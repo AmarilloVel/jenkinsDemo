@@ -22,7 +22,7 @@ pipeline {
                             docker stop api-demo-live || true
                             docker rm api-demo-live || true
                             docker build -t api-demo-jenkins .
-                            docker run -d -p 8090:8080 --name api-demo-live api-demo-jenkins
+                            docker run -d -p 8090:8090 --name api-demo-live api-demo-jenkins
                         '''
                     }
                 }
