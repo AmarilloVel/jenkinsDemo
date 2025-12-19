@@ -17,7 +17,6 @@ class ApiDemoApplicationTests {
     @Test
     void testDescuentoPositivo() {
         DemoController controller = new DemoController();
-        // ESTO VA A PASAR (Verde)
         assertEquals(90, controller.calculateDiscount(100));
     }
 
