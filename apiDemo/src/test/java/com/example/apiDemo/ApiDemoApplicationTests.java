@@ -23,7 +23,7 @@ class ApiDemoApplicationTests {
     @Test
     void testDescuentoNegativo() {
         DemoController controller = new DemoController();
-        // assertEquals(50, controller.calcularDescuento(100));
-        assertEquals(90, controller.calculateDiscount(100));
+        assertEquals(50, controller.calculateDiscount(100));
+        //assertEquals(90, controller.calculateDiscount(100));
     }
 }
