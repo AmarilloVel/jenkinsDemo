@@ -1,25 +1,31 @@
 pipeline {
     agent any
     stages {
-        // La etapa de Checkout ya no es necesaria, Jenkins lo hace solo
         stage('Build & Test 🏗️') {
             steps {
                 script {
-                    // El bloque .inside monta el workspace actual automáticamente
-                    docker.image('maven:3.8.6-eclipse-temurin-17').inside('-v /root/.m2:/root/.m2') {
-                        sh 'mvn clean package'
+                    // Entramos a la carpeta donde está el pom.xml
+                    dir('apiDemo') {
+                        docker.image('maven:3.8.6-eclipse-temurin-17').inside('-v /root/.m2:/root/.m2') {
+                            sh 'mvn clean package'
+                        }
                     }
                 }
             }
         }
         stage('Docker Deploy 🚀') {
             steps {
-                sh '''
-                    docker stop api-demo-live || true
-                    docker rm api-demo-live || true
-                    docker build -t api-demo-jenkins .
-                    docker run -d -p 8090:8080 --name api-demo-live api-demo-jenkins
-                '''
+                script {
+                    // Entramos a la carpeta donde está el Dockerfile
+                    dir('apiDemo') {
+                        sh '''
+                            docker stop api-demo-live || true
+                            docker rm api-demo-live || true
+                            docker build -t api-demo-jenkins .
+                            docker run -d -p 8090:8080 --name api-demo-live api-demo-jenkins
+                        '''
+                    }
+                }
             }
         }
     }
